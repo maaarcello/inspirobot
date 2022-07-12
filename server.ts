@@ -1,13 +1,54 @@
-import express from "express";
+const cron = require("node-cron");
+const axios = require("axios").default;
+const Fs = require("fs");
+const Path = require("path");
+require("dotenv").config();
 
-// Initialize the express engine
-const app = express();
-const port = 8080;
+console.log("Cron job started");
 
-app.use("/api/status", (req, res) => {
-  res.status(200).send({ status: "OK" });
-});
+const EVERY_15_MIN_MON_FRI = "*/15 9-18 * * 1-5";
+const EVERY_MINUTE = "* * * * *";
 
-app.listen(port, () => {
-  console.log(`TypeScript with Express http://localhost:${port}/`);
-});
+cron.schedule(
+  EVERY_MINUTE,
+  () => {
+    console.log("running a task every 30 mins every day of week");
+    getAndPush();
+  },
+  {
+    timezone: "Europe/Zurich",
+  }
+);
+
+const getAndPush = () =>
+  axios.get("https://inspirobot.me/api?generate=true").then((res: any) => {
+    console.log(res.data);
+    const adaptive = {
+      type: "message",
+      attachments: [
+        {
+          contentType: "application/vnd.microsoft.card.adaptive",
+          contentUrl: null,
+          content: {
+            $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+            type: "AdaptiveCard",
+            version: "1.2",
+            body: [
+              {
+                type: "Image",
+                url: res.data,
+              },
+            ],
+          },
+        },
+      ],
+    };
+    axios.post(process.env.WEBHOOK_URL, adaptive).then(
+      (response) => {
+        console.log(response.status);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  });
