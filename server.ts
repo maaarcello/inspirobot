@@ -14,7 +14,7 @@ cron.schedule(
   EVERY_15_MIN_MON_FRI,
   () => {
     console.log("running a task every 30 mins every day of week");
-    getAndPush();
+    // getAndPush();
   },
   {
     timezone: "Europe/Zurich",
