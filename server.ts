@@ -53,13 +53,3 @@ const getAndPush = () =>
       }
     );
   });
-
-// Initialize the express engine
-// const app = express();
-
-// // Take a port 3000 for running server.
-// const port: number = 8080;
-
-// app.listen(port, () => {
-//   console.log(`TypeScript with Express http://localhost:${port}/`);
-// });
