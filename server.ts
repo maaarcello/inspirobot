@@ -11,7 +11,7 @@ const EVERY_15_MIN_MON_FRI = "*/15 9-18 * * 1-5";
 const EVERY_MINUTE = "* * * * *";
 
 cron.schedule(
-  EVERY_MINUTE,
+  EVERY_15_MIN_MON_FRI,
   () => {
     console.log("running a task every 30 mins every day of week");
     getAndPush();
