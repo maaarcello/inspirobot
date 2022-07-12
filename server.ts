@@ -3,7 +3,7 @@ const axios = require("axios").default;
 const Fs = require("fs");
 const Path = require("path");
 require("dotenv").config();
-import express from "express";
+// import express from "express";
 
 console.log("Cron job started");
 
@@ -55,11 +55,11 @@ const getAndPush = () =>
   });
 
 // Initialize the express engine
-const app = express();
+// const app = express();
 
-// Take a port 3000 for running server.
-const port: number = 8080;
+// // Take a port 3000 for running server.
+// const port: number = 8080;
 
-app.listen(port, () => {
-  console.log(`TypeScript with Express http://localhost:${port}/`);
-});
+// app.listen(port, () => {
+//   console.log(`TypeScript with Express http://localhost:${port}/`);
+// });
