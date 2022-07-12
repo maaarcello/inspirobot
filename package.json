@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start-dev": "nodemon server.ts",
-    "start": "ts-node --transpile-only server.ts"
+    "start": "npx tsc server.ts && node server.js"
   },
   "dependencies": {
     "axios": "^0.27.2",
